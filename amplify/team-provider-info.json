@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hamamatsueventtable-dev-40836-authRole",
+      "UnauthRoleArn": "arn:aws:iam::865422985541:role/amplify-hamamatsueventtable-dev-40836-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::865422985541:role/amplify-hamamatsueventtable-dev-40836-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-hamamatsueventtable-dev-40836-deployment",
+      "UnauthRoleName": "amplify-hamamatsueventtable-dev-40836-unauthRole",
+      "StackName": "amplify-hamamatsueventtable-dev-40836",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:865422985541:stack/amplify-hamamatsueventtable-dev-40836/d087b970-b088-11ed-bd7a-066ed4579f5f",
+      "AmplifyAppId": "d1i81bjspb5y0z"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1i81bjspb5y0z",
+          "type": "cicd"
+        }
+      }
+    }
+  }
+}
