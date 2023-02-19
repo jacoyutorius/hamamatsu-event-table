@@ -17,6 +17,9 @@
           "appId": "d1i81bjspb5y0z",
           "type": "cicd"
         }
+      },
+      "auth": {
+        "hamamatsueventtableba4e2094": {}
       }
     }
   }
