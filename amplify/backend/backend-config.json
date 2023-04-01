@@ -27,6 +27,7 @@
       "service": "Cognito"
     }
   },
+  "custom": {},
   "hosting": {
     "amplifyhosting": {
       "lastPushTimeStamp": "2023-02-19T19:19:16.418Z",
