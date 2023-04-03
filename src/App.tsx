@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import "@aws-amplify/ui-react/styles.css";
-import {
-  withAuthenticator,
-  // Button,
-  // Heading,
-  // Image,
-  // View,
-  // Card,
-} from "@aws-amplify/ui-react";
-import { Amplify, API } from 'aws-amplify';
-import * as queries from './graphql/queries';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { AllQuery, HamamatsuEvents } from './API';
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Amplify } from 'aws-amplify';
 import { Pagination, Toast } from "flowbite-react"
 
 // components
@@ -105,24 +95,6 @@ function App({ signOut }: any) {
         </div>
     </SelectedMonthContext.Provider>
     </EventListContext.Provider>
-
-    // <View className="App">
-    //   <Card>
-    //     <Heading level={1}>We now have Auth!</Heading>
-    //   </Card>
-
-    //   {
-    //     records.map(record => {
-    //       return (
-    //         <div>
-    //           { record.Description }
-    //         </div>
-    //       )
-    //     })
-    //   }
-
-    //   <Button onClick={signOut}>Sign Out</Button>
-    // </View>
   );
 }
 

@@ -1,8 +1,12 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { Navbar, Button, Dropdown } from "flowbite-react"
-import { useApi } from "../../hooks/useApi"
 import { SelectedMonthContext } from "../../hooks/SelectedMonthContext"
 import { EventListContext } from "../../hooks/EventListContext"
+
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
+import { GraphQLQuery } from '@aws-amplify/api';
+import { QueryByMonthQuery } from '../../API';
 
 export type NavbarComponentProps = {
   onClick: () => void
@@ -25,15 +29,9 @@ const months = [
 ]
 
 const dropdownItems = (setMonth: any, setEventList: any): any => {
-  const ClickEvent = (month:string) => {
-    setMonth(month)
-    const { list } = useApi(month);
-    setEventList(list)
-  }
-
   return months.map(month => {
     return (
-      <Dropdown.Item onClick={() => ClickEvent(month)}>
+      <Dropdown.Item onClick={() => setMonth(month) }>
         {month}
       </Dropdown.Item>  
     )
@@ -43,6 +41,18 @@ const dropdownItems = (setMonth: any, setEventList: any): any => {
 export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
   const { month, setMonth } = useContext(SelectedMonthContext)
   const { setEventList } = useContext(EventListContext)
+
+  useEffect(() => {
+    const fetch = async () => {
+      const records = await API.graphql<GraphQLQuery<QueryByMonthQuery>>(
+        graphqlOperation(queries.queryByMonth, { month })
+      );
+      const list = records.data?.queryByMonth.items;
+      console.log(month, list)
+      setEventList(list)
+    }
+    fetch()
+  }, [month])
 
   return (
     <Navbar
