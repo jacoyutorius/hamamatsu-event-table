@@ -63,15 +63,15 @@ export const CardListComponent = (): JSX.Element => {
     setSelectedCardContent({
       ...initialCardContent,
       index: index,
-      no: row.No,
-      category: row.Category,
-      organizer: row.Organizer,
-      eventName: row.EventName,
-      place: row.Place,
-      placeAddress: row.PlaceAddress,
-      description: row.Description,
-      url: row.Url,
-      tel: row.Tel
+      no: Number(row.No),
+      category: row.Category || '',
+      organizer: row.Organizer || '',
+      eventName: row.EventName || '',
+      place: row.Place || '',
+      placeAddress: row.PlaceAddress || '',
+      description: row.Description || '',
+      url: row.Url || '',
+      tel: row.Tel || ''
     })
     setContentModalOpen(true)
   }
@@ -79,11 +79,11 @@ export const CardListComponent = (): JSX.Element => {
 
   const cards = eventList.map((v, i) => {
     return <CardComponent key={i}
-      category={v.Category}
-      eventName={v.EventName || v.OpenedAt}
-      description={v.Description}
-      startedOn={v.StartedOn}
-      url={v.Url}
+      category={v.Category || ''}
+      eventName={v.EventName || v.OpenedAt || ''}
+      description={v.Description || ''}
+      startedOn={v.StartedOn || ''}
+      url={v.Url || ''}
       onClick={ () => { openContentModal(i) } }></CardComponent>
   })
 

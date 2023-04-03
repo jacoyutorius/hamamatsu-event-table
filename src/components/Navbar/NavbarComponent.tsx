@@ -28,7 +28,7 @@ const months = [
   "202310",
 ]
 
-const dropdownItems = (setMonth: any, setEventList: any): any => {
+const dropdownItems = (setMonth: any): any => {
   return months.map(month => {
     return (
       <Dropdown.Item onClick={() => setMonth(month) }>
@@ -49,7 +49,10 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       );
       const list = records.data?.queryByMonth.items;
       console.log(month, list)
-      setEventList(list)
+
+      if (list && list.length > 0) {
+        setEventList(list)
+      }
     }
     fetch()
   }, [month])
@@ -98,7 +101,7 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
           inline={true}
           theme={{ inlineWrapper: "flex items-center text-gray-700" }}
           dismissOnClick={true}>
-          { dropdownItems(setMonth, setEventList) }
+          { dropdownItems(setMonth) }
         </Dropdown>
       </Navbar.Collapse>
     </Navbar>

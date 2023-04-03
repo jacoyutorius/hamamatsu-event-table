@@ -47,8 +47,8 @@ import { HamamatsuEvents } from "../API"
 
 export interface EventListContextType {
   // eventList: EventListType[],
-  eventList: HamamatsuEvents[] | [],
-  setEventList: (list:[]) => void
+  eventList: HamamatsuEvents[],
+  setEventList: (list: HamamatsuEvents[]) => void
 }
 
 const defaultValue: EventListContextType = {
