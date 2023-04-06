@@ -48,7 +48,7 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
         graphqlOperation(queries.queryByMonth, { month })
       );
       const list = records.data?.queryByMonth.items;
-      console.log(month, list)
+      console.log(month,`${list?.length} events`)
 
       if (list && list.length > 0) {
         setEventList(list)

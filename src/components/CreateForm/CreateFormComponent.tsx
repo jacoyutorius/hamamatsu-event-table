@@ -14,7 +14,7 @@ export const CreateFormComponent = (): JSX.Element => {
     event.preventDefault()
 
     if (!formData.email || !formData.password || !formData.content) return
-    console.log(formData)
+    // console.log(formData)
 
     alert("data saved")
     setFormData(initialFormState)
