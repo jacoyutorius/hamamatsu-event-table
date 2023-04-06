@@ -16,6 +16,7 @@ import { FooterComponent } from './components/Footer';
 import { SelectedMonthContext } from "./hooks/SelectedMonthContext"
 import { EventListContext } from './hooks/EventListContext';
 
+// amplify config
 import config from './aws-exports';
 Amplify.configure(config);
 
@@ -36,7 +37,7 @@ function App({ signOut }: any) {
   const [createModalOpen, setCreateModalOpen] = useState(false)
   const toggleCreateModal = () => { setCreateModalOpen(!createModalOpen) }
   const [month, setMonth] = useState("202304")
-  const [eventList, setEventList] = useState([])
+  const [eventList, setEventList] = useState<any>([])
 
   // TODO:一旦APIコールを停止 ---- start ----
   // const [records, setRecords] = useState<HamamatsuEvents[]>([])
