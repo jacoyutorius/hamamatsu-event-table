@@ -20,6 +20,9 @@ import { EventListContext } from './hooks/EventListContext';
 import config from './aws-exports';
 Amplify.configure(config);
 
+// debug
+console.log({config})
+
 const NoCard = () => {
   return (
     <div className="space-x-4 divide-x divide-gray-200 dark:divide-gray-700">
