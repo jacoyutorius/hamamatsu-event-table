@@ -53,8 +53,8 @@ export const all = /* GraphQL */ `
   }
 `;
 export const queryByMonth = /* GraphQL */ `
-  query QueryByMonth($month: String!) {
-    queryByMonth(month: $month) {
+  query QueryByMonth($month: String!, $limit: Int) {
+    queryByMonth(month: $month, limit: $limit) {
       items {
         Key
         Code

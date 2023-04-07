@@ -42,10 +42,14 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
   const { month, setMonth } = useContext(SelectedMonthContext)
   const { setEventList } = useContext(EventListContext)
 
+  // NOTE: とりあえず最大200レコード取得するようにしている。
+  // TODO: ほんとうはページネーションしたほうがいいのだが。
+  const limit = 200
+
   useEffect(() => {
     const fetch = async () => {
       const records = await API.graphql<GraphQLQuery<QueryByMonthQuery>>(
-        graphqlOperation(queries.queryByMonth, { month })
+        graphqlOperation(queries.queryByMonth, { month, limit })
       );
       const list = records.data?.queryByMonth.items;
       console.log(month,`${list?.length} events`)

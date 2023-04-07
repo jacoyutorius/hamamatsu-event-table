@@ -111,6 +111,7 @@ export type AllQuery = {
 
 export type QueryByMonthQueryVariables = {
   month: string,
+  limit?: number | null,
 };
 
 export type QueryByMonthQuery = {
