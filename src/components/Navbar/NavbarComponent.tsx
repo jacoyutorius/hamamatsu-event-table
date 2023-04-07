@@ -63,14 +63,14 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       fluid={true}
       rounded={true}
     >
-      <Navbar.Brand href="https://flowbite.com/">
+      <Navbar.Brand href="/">
         <img
-          src="https://flowbite.com/docs/images/logo.svg"
+          src="logo.png"
           className="mr-3 h-6 sm:h-9"
-          alt="Flowbite Logo"
+          alt="Logo"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite
+          Hamamatsu Events
         </span>
       </Navbar.Brand>
       <div className="flex gap-x-1 md:order-2">
@@ -85,11 +85,6 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link
-          href="/"
-          active={true}>
-          Home
-        </Navbar.Link>
         <Navbar.Link href="/">
           About
         </Navbar.Link>
