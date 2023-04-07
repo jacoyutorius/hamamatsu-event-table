@@ -2,7 +2,6 @@ import { useState, useContext } from "react"
 import { CardComponent } from "../Card/CardComponent"
 import { ModalComponent } from "../Modal/ModalComponent"
 import { ContentFormComponent, ContentFormComponentProps } from "../ContentForm/ContentFormComponent"
-import { SelectedMonthContext } from "../../hooks/SelectedMonthContext"
 import { EventListContext } from "../../hooks/EventListContext"
 
 const initialCardContent: ContentFormComponentProps = {
@@ -52,7 +51,6 @@ const initialCardContent: ContentFormComponentProps = {
 export const CardListComponent = (): JSX.Element => {
   const [contentModalOpen, setContentModalOpen] = useState(false)
   const [selectedCardContent, setSelectedCardContent] = useState(initialCardContent)
-  const {month, setMonth} = useContext(SelectedMonthContext)
   const {eventList, setEventList} = useContext(EventListContext)
 
   // NOTE: カードがクリックされたときに、選択されたカードのindexより表示対象のデータを抽出して
@@ -95,11 +93,7 @@ export const CardListComponent = (): JSX.Element => {
       <ContentFormComponent {...selectedCardContent} />
     </ModalComponent>
     
-    <EventListContext.Provider value={{ eventList, setEventList }}>
-    <SelectedMonthContext.Provider value={{ month, setMonth }}>
-      {/* カード */}
-      { cards }
-    </SelectedMonthContext.Provider>
-    </EventListContext.Provider>
+    {/* カード */}
+    { cards }
   </>)
 }

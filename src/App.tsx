@@ -54,23 +54,6 @@ function App({ signOut }: any) {
   const [month, setMonth] = useState("202304")
   const [eventList, setEventList] = useState<any>([])
 
-  // TODO:一旦APIコールを停止 ---- start ----
-  // const [records, setRecords] = useState<HamamatsuEvents[]>([])
-  // useEffect(() => {
-  //   fetchRecords()
-  // }, [])
-
-  // async function fetchRecords() {
-  //   const allRecords = await API.graphql<GraphQLQuery<AllQuery>>(
-  //     { query: queries.all }
-  //   );
-  //   console.log(allRecords.data?.all.items);
-  //   if (allRecords.data) {
-  //     setRecords(allRecords.data.all.items);
-  //   }
-  // }
-  // TODO:一旦APIコールを停止 ---- end ----
-
   return (
     <EventListContext.Provider value={ {eventList, setEventList} }>
     <SelectedMonthContext.Provider value={ {month, setMonth} }>
@@ -90,20 +73,11 @@ function App({ signOut }: any) {
               <NoCard /> 
             </div>}
           
-          { eventList.length > 0 &&
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-                <CardListComponent />
-              </div>
-              <div className="grid grid-cols-1 mb-20 ml-2 md:grid-cols-3 lg:grid-cols-4">
-                <Pagination
-                  currentPage={1}
-                  layout="navigation"
-                  totalPages={100}
-                  showIcons={true}
-                  onPageChange={ () => { "do nothing" }} />
-            </div>
-          </>}
+          {eventList.length > 0 &&
+            // NOTE: 一番最後のカードがフッタに隠れてしまうため、mbを指定している
+             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-20">
+              <CardListComponent />
+            </div>}
           
           <FooterComponent />
         </div>
