@@ -75,8 +75,6 @@ function App({ signOut }: any) {
     <EventListContext.Provider value={ {eventList, setEventList} }>
     <SelectedMonthContext.Provider value={ {month, setMonth} }>
         <div className="App">
-          {/* <Button onClick={signOut}>Sign Out</Button> */}
-
           {/* 登録フォームモーダル */}
           <ModalComponent
             modalOpen={ createModalOpen }
@@ -85,7 +83,7 @@ function App({ signOut }: any) {
           </ModalComponent>
           
           {/* ナビバー */}
-          <NavbarComponent onClick={toggleCreateModal} />
+          <NavbarComponent onClick={toggleCreateModal} signOut={signOut} />
 
           { eventList.length === 0 &&
             <div className="flex justify-center my-32">
