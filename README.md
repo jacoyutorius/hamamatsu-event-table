@@ -1,3 +1,16 @@
+# 浜松市イベント情報
+
+## 準備
+
+```
+mv .env_sample .env.local
+// 環境変数を追記
+
+npm run start
+```
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
