@@ -35,9 +35,6 @@ Amplify.configure(
   }
 )
 
-// debug
-console.log({config})
-
 const NoCard = () => {
   return (
     <div className="space-x-4 divide-x divide-gray-200 dark:divide-gray-700">
