@@ -50,7 +50,7 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       const list = records.data?.queryByMonth.items;
       console.log(month,`${list?.length} events`)
 
-      if (list && list.length > 0) {
+      if (list) {
         setEventList(list)
       }
     }
