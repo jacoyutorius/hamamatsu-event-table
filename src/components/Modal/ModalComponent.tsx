@@ -14,7 +14,7 @@ export const ModalComponent = (props: ModalComponentProps): JSX.Element => {
       size="4xl"
     >
       <Modal.Header>
-        Terms of Service
+        <h2 className="text-x2">イベント詳細</h2>
       </Modal.Header>
       <Modal.Body>
         { props.children }

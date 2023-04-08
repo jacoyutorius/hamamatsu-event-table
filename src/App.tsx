@@ -75,7 +75,7 @@ function App({ signOut }: any) {
           
           {eventList.length > 0 &&
             // NOTE: 一番最後のカードがフッタに隠れてしまうため、mbを指定している
-             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-20">
+             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-20 lg:mx-28">
               <CardListComponent />
             </div>}
           

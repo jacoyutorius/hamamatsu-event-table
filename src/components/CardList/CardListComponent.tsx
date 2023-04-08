@@ -84,6 +84,8 @@ export const CardListComponent = (): JSX.Element => {
       place={v.Place || ''}
       placeAddress={v.PlaceAddress || ''}
       url={v.Url || ''}
+      latitude={v.Latitude}
+      longitude={v.Longitude}
       onClick={ () => { openContentModal(i) } }></CardComponent>
   })
 
