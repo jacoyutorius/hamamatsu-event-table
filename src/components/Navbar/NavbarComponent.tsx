@@ -54,6 +54,7 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       );
       const list = records.data?.queryByMonth.items;
       console.log(month,`${list?.length} events`)
+      console.log(list?.[0])
 
       if (list) {
         setEventList(list)
@@ -81,22 +82,21 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       <div className="flex gap-x-1 md:order-2">
         <a className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
            onClick={ props.signOut }>SignOut</a>
-      
-        <Button onClick={ props.onClick }>
+        {/* <Button onClick={ props.onClick }>
           Show Modal
         </Button>
         <Button>
           Get started
-        </Button>
+        </Button> */}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link href="/">
+        {/* <Navbar.Link href="/">
           About
         </Navbar.Link>
         <Navbar.Link href="/">
           Services
-        </Navbar.Link>
+        </Navbar.Link> */}
         <Dropdown
           label={month}
           inline={true}

@@ -4,11 +4,11 @@ export const FooterComponent = (): JSX.Element => {
   return (
     <Footer container={true} className="fixed bottom-0 left-0 z-20">
       <Footer.Copyright
-        href="#"
-        by="Flowbite™"
-        year={2022}
+        href="https://twitter.com/jacoyutorius"
+        by="@jacoyutorius"
+        year={2023}
       />
-      <Footer.LinkGroup>
+      {/* <Footer.LinkGroup>
         <Footer.Link href="#">
           About
         </Footer.Link>
@@ -21,7 +21,7 @@ export const FooterComponent = (): JSX.Element => {
         <Footer.Link href="#">
           Contact
         </Footer.Link>
-      </Footer.LinkGroup>
+      </Footer.LinkGroup> */}
     </Footer>
   )
 }

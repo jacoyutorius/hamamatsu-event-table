@@ -81,6 +81,8 @@ export const CardListComponent = (): JSX.Element => {
       eventName={v.EventName || v.OpenedAt || ''}
       description={v.Description || ''}
       startedOn={v.StartedOn || ''}
+      place={v.Place || ''}
+      placeAddress={v.PlaceAddress || ''}
       url={v.Url || ''}
       onClick={ () => { openContentModal(i) } }></CardComponent>
   })
