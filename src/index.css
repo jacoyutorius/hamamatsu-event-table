@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .App {
-  background-color: #83cfdc;
+  /* background-color: #83cfdc; */
   min-height: 100vh;
 }
 
