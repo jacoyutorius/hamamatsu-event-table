@@ -46,6 +46,9 @@ function getLabelColor(category: string) {
   else if (category === "講座・教室") {
     return "bg-lime-50 text-lime-600"
   }
+  else if (category === "スポーツ") {
+    return "bg-sky-50 text-sky-600"
+  }
   else {
     console.log({category})
     return "bg-gray-50 text-gray-800"
