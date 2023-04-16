@@ -1,4 +1,8 @@
+import { useContext } from "react"
+import { SelectedEventContext } from "../../hooks/SelectedEventContext"
+
 export type CalendarDayEventProps = {
+  key: string,
   eventName: string,
   url: string | null,
   category: string
@@ -7,18 +11,23 @@ export type CalendarDayEventProps = {
 export type CalendarDayComponentProps = {
   day: any,
   isFirstWeek: boolean,
-  events: Array<CalendarDayEventProps>
+  events: Array<CalendarDayEventProps>,
+  onClick: () => void
 }
 
-type LinkProps = {
+type ModalLinkProps = {
   text: string,
   url: string,
-  category: string
+  category: string,
+  onClick: () => void
 }
 
-const Link = ({ text, url, category }: LinkProps): JSX.Element => {
+const ModalLink = ({ text, url, category, onClick }: ModalLinkProps): JSX.Element => {
   return (
-    <a href={url} className={ `${getLabelColor(category)} text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300` } target="_blank" rel="noreferrer">
+    <a onClick={onClick}
+      className={`${getLabelColor(category)} cursor-pointer text-sm font-medium mr-2 px-2.5 py-0.5 rounded`}
+      target="_blank"
+      rel="noreferrer">
       {text}
     </a>
   )
@@ -69,10 +78,21 @@ function getDateColor(day:any) {
   }
 }
 
-export const CalendarDayComponent = ({ day, isFirstWeek, events }: CalendarDayComponentProps): JSX.Element => {
-  const linkComponents = events.map((event:CalendarDayEventProps) => {
+export const CalendarDayComponent = ({ day, isFirstWeek, events, onClick }: CalendarDayComponentProps): JSX.Element => {
+  const { setEventKey } = useContext(SelectedEventContext)
+  
+  const linkComponents = events.map((event: CalendarDayEventProps) => {
+    const onModalLinkClick = () => {
+      setEventKey(event.key)
+      onClick()
+    }
+  
     return (<div>
-      <Link text={ event.eventName } url={ event.url || "" } category={ event.category }></Link>
+      <ModalLink
+        onClick={onModalLinkClick}
+        text={event.eventName}
+        url={event.url || ""}
+        category={event.category} />
     </div>)
   })
 

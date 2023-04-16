@@ -52,41 +52,53 @@ export const ContentFormComponent = ({ index, no, category, organizer, eventName
           { category }
         </Badge>
       </div>
-      <div>
+      {/* <div>
         <div className="mb-2 block">
           <Label value="イベント名" />
         </div>
-        { eventName }
-      </div>
+        <p className="text-md text-gray-900 dark:text-white">
+          { eventName }
+        </p>
+      </div> */}
       <div>
         <div className="mb-2 block">
           <Label value="開催場所" />
         </div>
-        { place }
+        <p className="text-md text-gray-900 dark:text-white">
+          { place }
+        </p>
       </div>
       <div>
         <div className="mb-2 block">
           <Label value="開催住所" />
         </div>
-        { placeAddress }
+        <p className="text-md text-gray-900 dark:text-white">
+          { placeAddress }
+        </p>  
       </div>
       <div>
         <div className="mb-2 block">
           <Label value="詳細" />
         </div>
-        { description }
+        <p className="text-md text-gray-900 dark:text-white">
+          {description}
+        </p>
       </div>
       <div>
         <div className="mb-2 block">
           <Label value="URL" />
         </div>
-        <a href={ url } target="_blank" rel="noopener noreferrer">{ url }</a>
+        <p className="text-md text-gray-900 dark:text-white">
+          <a href={ url } target="_blank" rel="noopener noreferrer">{ url }</a>
+        </p>
       </div>
       <div>
         <div className="mb-2 block">
           <Label value="電話番号" />
         </div>
-        <a href={`tel:${tel}`}>{ tel }</a>
+        <p className="text-md text-gray-900 dark:text-white">
+          <a href={`tel:${tel}`}>{ tel }</a>
+        </p>
       </div>
     </form>)
 }
