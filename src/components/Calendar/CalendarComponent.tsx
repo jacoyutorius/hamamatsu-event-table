@@ -42,8 +42,15 @@ function getEventListByDay(eventList:any[], month:string) {
 
   monthDays.forEach((day:any) => {
     const yyyymmdd = dayjs(day).format("YYYY-MM-DD")
-    let filtered = eventList.filter((event:any) => event?.StartedOn === yyyymmdd)
-    list[yyyymmdd] = filtered
+
+    list[yyyymmdd] = eventList.filter((event: any) => event?.StartedOn === yyyymmdd)
+                            .sort((eventA: any, eventB: any) => {
+                              if (eventA.Category > eventB.Category) {
+                                return 1;
+                              } else {
+                                return -1;
+                              }
+                            })
   })
 
   return list
@@ -142,35 +149,37 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
 
     fetch()
   }, [eventKey])
+
+  const calendarArray = calendar.map((row:any, i:number) => { 
+    return (<React.Fragment key={i}>
+      {row.map((day: any, j: number) => {
+        const dayYYYYMMDD = day.format("YYYY-MM-DD")
+        let events = []
+        if (ret[dayYYYYMMDD]) {
+          events = ret[dayYYYYMMDD].map((row: any) => {
+            return {
+              key: row.Key,
+              eventName: row.EventName,
+              url: row.Url,
+              category: row.Category
+            }
+          })
+        }
+
+        return (<CalendarDayComponent
+          key={ j }
+          day={ day }
+          isFirstWeek={i === 0}
+          events={ events }
+          onClick={ openModal }/>)
+      }) }
+    </React.Fragment>)
+  })
   
   return (<SelectedEventContext.Provider value={ { eventKey, setEventKey } }>
     <div className="flex flex-1">
       <div className="flex-1 grid grid-cols-1 md:grid-cols-7 grid-rows-6">
-        {calendar.map((row:any, i:number) => { 
-          return (<React.Fragment key={i}>
-            {row.map((day: any, j: number) => {
-              const dayYYYYMMDD = day.format("YYYY-MM-DD")
-              let events = []
-              if (ret[dayYYYYMMDD]) {
-                events = ret[dayYYYYMMDD].map((row: any) => {
-                  return {
-                    key: row.Key,
-                    eventName: row.EventName,
-                    url: row.Url,
-                    category: row.Category
-                  }
-                })
-              }
-
-              return (<CalendarDayComponent
-                key={ j }
-                day={ day }
-                isFirstWeek={i === 0}
-                events={ events }
-                onClick={ openModal }/>)
-            })}
-          </React.Fragment>)
-        }) } 
+        { calendarArray } 
       </div>
     </div>
 
