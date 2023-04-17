@@ -101,9 +101,9 @@ export const CalendarDayComponent = ({ day, isFirstWeek, events, onClick }: Cale
   return (<div className="border border-gray-200 flex flex-col">
     <header className={`flex flex-col items-center ${headBgColor}`}>
       {isFirstWeek && <p className="text-sm mt-1">{day.format("ddd")}</p>}
-        <p className={"text-md p-1 my-1 text-center"}>{day.format("DD")}</p>
+        <p className={"text-md p-1 my-1 text-center"}>{day.format("D")}</p>
     </header>
-    <div className="p-2">
+    <div className="px-2 h-64 overflow-x-auto">
       { linkComponents }
     </div>
   </div>)
