@@ -4,7 +4,8 @@ import { CalendarDayComponent } from "./CalendarDayComponent"
 import { EventListContext } from "../../hooks/EventListContext"
 import { SelectedMonthContext } from "../../hooks/SelectedMonthContext"
 import { ModalComponent } from "../Modal"
-import { ContentFormComponent, ContentFormComponentProps } from "../ContentForm/ContentFormComponent"
+// import { ContentFormComponent, ContentFormComponentProps } from "../ContentForm/ContentFormComponent"
+import { EventContentsComponent } from "../EventContents"
 
 // hooks
 import { SelectedEventContext } from "../../hooks/SelectedEventContext"
@@ -13,7 +14,7 @@ import { SelectedEventContext } from "../../hooks/SelectedEventContext"
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { GraphQLQuery } from '@aws-amplify/api';
-import { GetOneQuery } from '../../API';
+import { GetOneQuery, HamamatsuEvents } from '../../API';
 
 export type CalendarComponentProps = {
   calendar: any[]
@@ -56,49 +57,49 @@ function getEventListByDay(eventList:any[], month:string) {
   return list
 }
 
-const initialCardContent: ContentFormComponentProps = {
-  index: 0,
-  updatedAt: '',
-  longitude: '',
-  latitude: '',
-  capacity: '',
-  place: '',
-  eventNameKana: '',
-  startedAtNote: '',
-  startedAt: '',
-  childInformation: '',
-  closingOn: '',
-  openedAt: '',
-  contact: '',
-  priceDetail: '',
-  importedAt: '',
-  facilityNo: '',
-  endedAt: '',
-  price: '',
-  tel: '',
-  formula: '',
-  eventName: '',
-  key: '',
-  code: 0,
-  note: '',
-  no: 0,
-  city: '',
-  parking: '',
-  startedOn: '',
-  eventNameEn: '',
-  description: '',
-  endedOn: '',
-  url: '',
-  prefecture: '',
-  howToJoin: '',
-  access: '',
-  telExtention: '',
-  district: '',
-  closingAt: '',
-  organizer: '',
-  placeAddress: '',
-  category: ''
-}
+// const initialCardContent: ContentFormComponentProps = {
+//   index: 0,
+//   updatedAt: '',
+//   longitude: '',
+//   latitude: '',
+//   capacity: '',
+//   place: '',
+//   eventNameKana: '',
+//   startedAtNote: '',
+//   startedAt: '',
+//   childInformation: '',
+//   closingOn: '',
+//   openedAt: '',
+//   contact: '',
+//   priceDetail: '',
+//   importedAt: '',
+//   facilityNo: '',
+//   endedAt: '',
+//   price: '',
+//   tel: '',
+//   formula: '',
+//   eventName: '',
+//   key: '',
+//   code: 0,
+//   note: '',
+//   no: 0,
+//   city: '',
+//   parking: '',
+//   startedOn: '',
+//   eventNameEn: '',
+//   description: '',
+//   endedOn: '',
+//   url: '',
+//   prefecture: '',
+//   howToJoin: '',
+//   access: '',
+//   telExtention: '',
+//   district: '',
+//   closingAt: '',
+//   organizer: '',
+//   placeAddress: '',
+//   category: ''
+// }
 
 export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Element => { 
   const { eventList } = useContext(EventListContext)
@@ -110,6 +111,7 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
   // modal制御
   const [modalOpen, setModalOpen] = useState(false)
   const [eventKey, setEventKey] = useState("")
+  const [event, setEvent] = useState<HamamatsuEvents | undefined | null>(null)
 
   const closeModal = () => {
     setModalOpen(false)
@@ -145,6 +147,8 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
         url: event?.Url || '',
         tel: event?.Tel || ''
       })
+
+      setEvent(event)
     }
 
     fetch()
@@ -189,7 +193,8 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
       onClose={closeModal}
       title={ selectedCardContent.eventName }
     >
-      <ContentFormComponent {...selectedCardContent} />
+      { event && <EventContentsComponent event={ event } /> }
+      {/* <ContentFormComponent {...selectedCardContent} /> */}
     </ModalComponent>
   </SelectedEventContext.Provider>)
 }
