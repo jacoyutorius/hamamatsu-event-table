@@ -65,18 +65,18 @@ Amplify.configure(
   }
 )
 
-const NoCard = () => {
-  return (
-    <div className="space-x-4 divide-x divide-gray-200 dark:divide-gray-700">
-      <Toast>
-        {/* <FaTelegramPlane className="h-5 w-5 text-blue-600 dark:text-blue-500" /> */}
-        <div className="pl-4 text-sm font-normal">
-          イベント情報が登録されていません。
-        </div>
-      </Toast>
-    </div>
-  );
-}
+// const NoCard = () => {
+//   return (
+//     <div className="space-x-4 divide-x divide-gray-200 dark:divide-gray-700">
+//       <Toast>
+//         {/* <FaTelegramPlane className="h-5 w-5 text-blue-600 dark:text-blue-500" /> */}
+//         <div className="pl-4 text-sm font-normal">
+//           イベント情報が登録されていません。
+//         </div>
+//       </Toast>
+//     </div>
+//   );
+// }
 
 function getMonth(year:number, month:number) {
   const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day()
