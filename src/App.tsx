@@ -94,7 +94,7 @@ function getMonth(year:number, month:number) {
 function App({ signOut }: any) {
   const [createModalOpen, setCreateModalOpen] = useState(false)
   const toggleCreateModal = () => { setCreateModalOpen(!createModalOpen) }
-  const [month, setMonth] = useState("202304")
+  const [month, setMonth] = useState(dayjs(new Date()).format("YYYYMM"))
   const [eventList, setEventList] = useState<any>([])
 
   const calendar = getMonth(Number(month.substring(0, 4)), Number(month.substring(4, 6)) - 1)
