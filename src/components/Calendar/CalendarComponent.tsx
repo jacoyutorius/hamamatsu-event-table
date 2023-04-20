@@ -108,7 +108,8 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
 
         return (<CalendarDayComponent
           key={ j }
-          day={ day }
+          day={day}
+          isTargetMonth={ month === day.format("YYYYMM") }
           isFirstWeek={i === 0}
           events={ events }
           onClick={ openModal }/>)

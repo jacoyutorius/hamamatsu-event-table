@@ -17,7 +17,10 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"></path>
             </svg>
-            <span className="text-base text-gray-900 dark:text-white">{event?.Place}</span>
+            <span className="text-base text-gray-900 dark:text-white">
+              {event?.Place}
+              { event?.PlaceAddress && ` (${event?.PlaceAddress})` }
+            </span>
           </a>)
   
   return (
@@ -57,7 +60,6 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </th>
             <td className="px-6 py-4">
               { isMapExist && mapLink }
-              { event?.PlaceAddress && ` (${event?.PlaceAddress})` }
             </td>
           </tr>
           <tr className="bg-white border-b">

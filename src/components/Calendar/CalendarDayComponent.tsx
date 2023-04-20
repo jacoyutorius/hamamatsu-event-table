@@ -10,6 +10,7 @@ export type CalendarDayEventProps = {
 
 export type CalendarDayComponentProps = {
   day: any,
+  isTargetMonth: boolean | false,
   isFirstWeek: boolean,
   events: Array<CalendarDayEventProps>,
   onClick: () => void
@@ -78,7 +79,7 @@ function getDateColor(day:any) {
   }
 }
 
-export const CalendarDayComponent = ({ day, isFirstWeek, events, onClick }: CalendarDayComponentProps): JSX.Element => {
+export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, onClick }: CalendarDayComponentProps): JSX.Element => {
   const { setEventKey } = useContext(SelectedEventContext)
   
   const linkComponents = events.map((event: CalendarDayEventProps) => {
@@ -98,7 +99,7 @@ export const CalendarDayComponent = ({ day, isFirstWeek, events, onClick }: Cale
 
   const headBgColor = getDateColor(day)
 
-  return (<div className="border border-gray-200 flex flex-col">
+  return (<div className={ `border border-gray-200 flex flex-col ${ isTargetMonth ? '' : 'bg-slate-300' }` }>
     <header className={`flex flex-col items-center ${headBgColor}`}>
       {isFirstWeek && <p className="text-sm mt-1">{day.format("ddd")}</p>}
         <p className={"text-md p-1 my-1 text-center"}>{day.format("D")}</p>
