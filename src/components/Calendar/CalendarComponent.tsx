@@ -4,7 +4,6 @@ import { CalendarDayComponent } from "./CalendarDayComponent"
 import { EventListContext } from "../../hooks/EventListContext"
 import { SelectedMonthContext } from "../../hooks/SelectedMonthContext"
 import { ModalComponent } from "../Modal"
-// import { ContentFormComponent, ContentFormComponentProps } from "../ContentForm/ContentFormComponent"
 import { EventContentsComponent } from "../EventContents"
 
 // hooks
@@ -57,55 +56,9 @@ function getEventListByDay(eventList:any[], month:string) {
   return list
 }
 
-// const initialCardContent: ContentFormComponentProps = {
-//   index: 0,
-//   updatedAt: '',
-//   longitude: '',
-//   latitude: '',
-//   capacity: '',
-//   place: '',
-//   eventNameKana: '',
-//   startedAtNote: '',
-//   startedAt: '',
-//   childInformation: '',
-//   closingOn: '',
-//   openedAt: '',
-//   contact: '',
-//   priceDetail: '',
-//   importedAt: '',
-//   facilityNo: '',
-//   endedAt: '',
-//   price: '',
-//   tel: '',
-//   formula: '',
-//   eventName: '',
-//   key: '',
-//   code: 0,
-//   note: '',
-//   no: 0,
-//   city: '',
-//   parking: '',
-//   startedOn: '',
-//   eventNameEn: '',
-//   description: '',
-//   endedOn: '',
-//   url: '',
-//   prefecture: '',
-//   howToJoin: '',
-//   access: '',
-//   telExtention: '',
-//   district: '',
-//   closingAt: '',
-//   organizer: '',
-//   placeAddress: '',
-//   category: ''
-// }
-
 export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Element => { 
   const { eventList } = useContext(EventListContext)
   const { month } = useContext(SelectedMonthContext)
-  const [selectedCardContent, setSelectedCardContent] = useState(initialCardContent)
-  
   const ret = getEventListByDay(eventList, month)
 
   // modal制御
@@ -115,7 +68,7 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
 
   const closeModal = () => {
     setModalOpen(false)
-    setSelectedCardContent(initialCardContent)
+    // setSelectedCardContent(null)
   }
 
   // NOTE: カードがクリックされたときに、選択されたカードのindexより表示対象のデータを抽出して
@@ -128,27 +81,10 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
     const fetch = async () => {
       if (eventKey === null) return
 
-      // console.log(eventKey)
       const record = await API.graphql<GraphQLQuery<GetOneQuery>>(
         graphqlOperation(queries.getOne, { Key: eventKey })
       );
-      // console.log(record.data?.getOne)
-      const event = record.data?.getOne
-
-      setSelectedCardContent({
-        ...initialCardContent,
-        no: Number(event?.No),
-        category: event?.Category || '',
-        organizer: event?.Organizer || '',
-        eventName: event?.EventName || '',
-        place: event?.Place || '',
-        placeAddress: event?.PlaceAddress || '',
-        description: event?.Description || '',
-        url: event?.Url || '',
-        tel: event?.Tel || ''
-      })
-
-      setEvent(event)
+      setEvent(record.data?.getOne)
     }
 
     fetch()
@@ -191,7 +127,7 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
     <ModalComponent
       modalOpen={ modalOpen }
       onClose={closeModal}
-      title={ selectedCardContent.eventName }
+      title={ event?.EventName || '' }
     >
       { event && <EventContentsComponent event={ event } /> }
       {/* <ContentFormComponent {...selectedCardContent} /> */}

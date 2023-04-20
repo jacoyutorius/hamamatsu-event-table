@@ -25,7 +25,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
       <table className="w-full text-base text-left text-gray-800 dark:text-gray-400">
         <tbody>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               イベント名
             </th>
             <td className="px-6 py-4">
@@ -36,7 +36,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               カテゴリー
             </th>
             <td className="px-6 py-4">
@@ -44,7 +44,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               詳細
             </th>
             <td className="px-6 py-4">
@@ -52,7 +52,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               場所
             </th>
             <td className="px-6 py-4">
@@ -61,7 +61,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               料金
             </th>
             <td className="px-6 py-4">
@@ -69,7 +69,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               申し込み
             </th>
             <td className="px-6 py-4">
@@ -77,19 +77,33 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               URL
             </th>
             <td className="px-6 py-4">
-              <a href={ event?.Url } target="_blank" rel="noopener noreferrer">{ event?.Url }</a>
+              {
+                event?.Url && (<a href={event?.Url || ''} target="_blank" rel="noopener noreferrer">
+                  <svg
+                    className="inline w-6 h-6 mr-2 dark:text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                  </svg>
+                  {event?.Url}
+                </a>)
+              }
             </td>
           </tr>
           <tr className="bg-white border-b">
-            <th scope="row" className="text-right px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="text-right md:px-6 py-4 font-medium whitespace-nowrap">
               電話番号
             </th>
             <td className="px-6 py-4">
-              <a href={`tel:${event?.Tel}`}>
+              { event?.Tel && (<a href={`tel:${event?.Tel}`}>
                 <svg
                   className="inline w-6 h-6 mr-2 dark:text-white"
                   fill="none"
@@ -100,7 +114,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
                   aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path></svg>
                 {event?.Tel}
-              </a>
+              </a>) }
             </td>
           </tr>
         </tbody>
