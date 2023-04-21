@@ -23,14 +23,13 @@ type ModalLinkProps = {
   onClick: () => void
 }
 
+// eslint-disable
 const ModalLink = ({ text, url, category, onClick }: ModalLinkProps): JSX.Element => {
   return (
-    <a onClick={onClick}
-      className={`${getLabelColor(category)} cursor-pointer text-sm font-medium mr-2 px-2.5 py-0.5 rounded`}
-      target="_blank"
-      rel="noreferrer">
+    <p onClick={onClick}
+      className={`${getLabelColor(category)} my-1 cursor-pointer font-medium mr-2 px-2.5 py-0.5 rounded`}>
       {text}
-    </a>
+    </p>
   )
 }
 
@@ -102,7 +101,7 @@ export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, 
   return (<div className={ `border border-gray-200 flex flex-col ${ isTargetMonth ? '' : 'bg-slate-300' }` }>
     <header className={`flex flex-col items-center ${headBgColor}`}>
       {isFirstWeek && <p className="text-sm mt-1">{day.format("ddd")}</p>}
-        <p className={"text-md p-1 my-1 text-center"}>{day.format("D")}</p>
+        <p className={"text-base p-1 my-1 text-center"}>{day.format("M/D")}</p>
     </header>
     <div className="px-2 h-64 overflow-x-auto">
       { linkComponents }
