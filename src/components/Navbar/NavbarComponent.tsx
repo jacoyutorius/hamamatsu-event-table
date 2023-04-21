@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react"
+import dayjs from "dayjs"
 import { Navbar, Button, Dropdown } from "flowbite-react"
 import { SelectedMonthContext } from "../../hooks/SelectedMonthContext"
 import { EventListContext } from "../../hooks/EventListContext"
@@ -14,25 +15,25 @@ export type NavbarComponentProps = {
 }
 
 const months = [
-  "202301",
-  "202302",
-  "202303",
-  "202304",
-  "202305",
-  "202306",
-  "202307",
-  "202308",
-  "202309",
-  "202310",
-  "202311",
-  "202312",
+  dayjs(new Date(2023, 1, 1)),
+  dayjs(new Date(2023, 2, 1)),
+  dayjs(new Date(2023, 3, 1)),
+  dayjs(new Date(2023, 4, 1)),
+  dayjs(new Date(2023, 5, 1)),
+  dayjs(new Date(2023, 6, 1)),
+  dayjs(new Date(2023, 7, 1)),
+  dayjs(new Date(2023, 8, 1)),
+  dayjs(new Date(2023, 9, 1)),
+  dayjs(new Date(2023, 10, 1)),
+  dayjs(new Date(2023, 11, 1)),
+  dayjs(new Date(2023, 12, 1)),
 ]
 
 const dropdownItems = (setMonth: any): any => {
   return months.map(month => {
     return (
-      <Dropdown.Item onClick={() => setMonth(month) }>
-        {month}
+      <Dropdown.Item onClick={() => setMonth(month.format('YYYYMM')) }>
+        { month.format('YYYY/MM') }
       </Dropdown.Item>  
     )
   })
