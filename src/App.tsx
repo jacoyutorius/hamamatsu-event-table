@@ -24,6 +24,10 @@ import config from './aws-exports';
 // clouswatch RUM
 import { AwsRum, AwsRumConfig } from 'aws-rum-web';
 
+// GA4
+import ReactGA from "react-ga4";
+
+// initialize CloudWatch RUM
 try {
   const config: AwsRumConfig = {
     sessionSampleRate: 1,
@@ -48,6 +52,9 @@ try {
 } catch (error) {
   // Ignore errors thrown during CloudWatch RUM web client initialization
 }
+
+// initialize GA4
+if (process.env.REACT_APP_GA4_ID) ReactGA.initialize(process.env.REACT_APP_GA4_ID);
 
 // NOTE: AmplifyにデプロイするとAppSync関連の設定情報が生成されない様子なので
 //  環境変数から読み込んでAmplify.configureに渡すようにしている。
