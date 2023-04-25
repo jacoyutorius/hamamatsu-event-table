@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 import "@aws-amplify/ui-react/styles.css";
-// import { withAuthenticator } from "@aws-amplify/ui-react";
-import { Amplify } from 'aws-amplify';
 import dayjs from 'dayjs';
 
 // components
-import { Toast } from "flowbite-react"
 import { NavbarComponent } from './components/Navbar';
 import { ModalComponent } from './components/Modal';
 import { CreateFormComponent } from "./components/CreateForm"
@@ -18,59 +15,10 @@ import { FooterComponent } from './components/Footer';
 import { SelectedMonthContext } from "./hooks/SelectedMonthContext"
 import { EventListContext } from './hooks/EventListContext';
 
-// amplify config
-import config from './aws-exports';
-
-// clouswatch RUM
-import { AwsRum, AwsRumConfig } from 'aws-rum-web';
-
-// GA4
-import ReactGA from "react-ga4";
-
-// initialize CloudWatch RUM
-try {
-  const config: AwsRumConfig = {
-    sessionSampleRate: 1,
-    guestRoleArn: "arn:aws:iam::865422985541:role/RUM-Monitor-ap-northeast-1-865422985541-7532315671861-Unauth",
-    identityPoolId: "ap-northeast-1:e2014572-68e5-48d5-be28-db1d5dc571e3",
-    endpoint: "https://dataplane.rum.ap-northeast-1.amazonaws.com",
-    telemetries: ["performance","errors","http"],
-    allowCookies: true,
-    enableXRay: false
-  };
-
-  const APPLICATION_ID: string = '8d9cac35-e51a-4bef-9f10-47f40a637565';
-  const APPLICATION_VERSION: string = '1.0.0';
-  const APPLICATION_REGION: string = 'ap-northeast-1';
-
-  const awsRum: AwsRum = new AwsRum(
-    APPLICATION_ID,
-    APPLICATION_VERSION,
-    APPLICATION_REGION,
-    config
-  );
-} catch (error) {
-  // Ignore errors thrown during CloudWatch RUM web client initialization
-}
-
-// initialize GA4
-if (process.env.REACT_APP_GA4_ID) ReactGA.initialize(process.env.REACT_APP_GA4_ID);
-
-// NOTE: AmplifyにデプロイするとAppSync関連の設定情報が生成されない様子なので
-//  環境変数から読み込んでAmplify.configureに渡すようにしている。
-const GraphQlConfig: Object = {
-  aws_appsync_graphqlEndpoint: process.env.REACT_APP_APPSYNC_GRAPHQLENDPOINT,
-  aws_appsync_region: process.env.REACT_APP_APPSYNC_REGION,
-  aws_appsync_authenticationType: process.env.REACT_APP_APPSYNC_AUTHENTICATIONTYPE,
-  aws_appsync_apiKey: process.env.REACT_APP_APPSYNC_APIKEY
-}
-
-Amplify.configure(
-  {
-    ...config,
-    ...GraphQlConfig
-  }
-)
+// hooks
+import { useAmplify } from './hooks/useAmplify';
+import { useReactGa4 } from './hooks/useReactGa4';
+import { useCloudWatchRum } from './hooks/useCloudWatchRum';
 
 // const NoCard = () => {
 //   return (
@@ -99,6 +47,10 @@ function getMonth(year:number, month:number) {
 }
 
 function App({ signOut }: any) {
+  useAmplify()
+  useReactGa4()
+  useCloudWatchRum()
+
   const [createModalOpen, setCreateModalOpen] = useState(false)
   const toggleCreateModal = () => { setCreateModalOpen(!createModalOpen) }
   const [month, setMonth] = useState(dayjs(new Date()).format("YYYYMM"))
@@ -142,5 +94,6 @@ function App({ signOut }: any) {
   );
 }
 
-// export default withAuthenticator(App);
+// Note: 認証機能は一旦off
+//  export default withAuthenticator(App);
 export default App;
