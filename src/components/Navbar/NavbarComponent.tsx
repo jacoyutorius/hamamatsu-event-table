@@ -1,13 +1,6 @@
-import React, { useContext, useEffect } from "react"
 import dayjs from "dayjs"
-import { Navbar, Button, Dropdown } from "flowbite-react"
-import { SelectedMonthContext } from "../../hooks/SelectedMonthContext"
-import { EventListContext } from "../../hooks/EventListContext"
-
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { QueryByMonthQuery } from '../../API';
+import { Navbar, Dropdown } from "flowbite-react"
+import { useEventList } from "../../hooks/useEventList"
 
 export type NavbarComponentProps = {
   onClick: () => void,
@@ -40,27 +33,7 @@ const dropdownItems = (setMonth: any): any => {
 }
 
 export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
-  const { month, setMonth } = useContext(SelectedMonthContext)
-  const { setEventList } = useContext(EventListContext)
-
-  // NOTE: とりあえず最大200レコード取得するようにしている。
-  // TODO: ほんとうはページネーションとかしたほうがいいのだが。
-  const limit = 200
-
-  useEffect(() => {
-    const fetch = async () => {
-      const records = await API.graphql<GraphQLQuery<QueryByMonthQuery>>(
-        graphqlOperation(queries.queryByMonth, { month, limit })
-      );
-      const list = records.data?.queryByMonth.items;
-      console.log(month, `${list?.length} events`)
-
-      if (list) {
-        setEventList(list)
-      }
-    }
-    fetch()
-  }, [month])
+  const { month, setMonth } = useEventList()
 
   return (
     <Navbar
