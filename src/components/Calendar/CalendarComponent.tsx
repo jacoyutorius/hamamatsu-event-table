@@ -8,12 +8,7 @@ import { EventContentsComponent } from "../EventContents"
 
 // hooks
 import { SelectedEventContext } from "../../hooks/SelectedEventContext"
-
-// GraphQL
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { GetOneQuery, HamamatsuEvents } from '../../API';
+import { useEventDetail } from "../../hooks/useEventDetail"
 
 export type CalendarComponentProps = {
   calendar: any[]
@@ -63,8 +58,12 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
 
   // modal制御
   const [modalOpen, setModalOpen] = useState(false)
-  const [eventKey, setEventKey] = useState("")
-  const [event, setEvent] = useState<HamamatsuEvents | undefined | null>(null)
+
+  const {
+    eventKey,
+    setEventKey,
+    event,
+  } = useEventDetail()
 
   const closeModal = () => {
     setModalOpen(false)
@@ -76,19 +75,6 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
   const openModal = () => {
     setModalOpen(true)
   }
-
-  useEffect(() => {
-    const fetch = async () => {
-      if (eventKey === null) return
-
-      const record = await API.graphql<GraphQLQuery<GetOneQuery>>(
-        graphqlOperation(queries.getOne, { Key: eventKey })
-      );
-      setEvent(record.data?.getOne)
-    }
-
-    fetch()
-  }, [eventKey])
 
   const calendarArray = calendar.map((row:any, i:number) => { 
     return (<React.Fragment key={i}>
