@@ -14,7 +14,7 @@ export const useEventList = () => {
 
   // NOTE: とりあえず最大200レコード取得するようにしている。
   // TODO: ほんとうはページネーションとかしたほうがいいのだが。
-  const limit = 200
+  const limit = 400
 
   useEffect(() => {
     const fetch = async () => {
