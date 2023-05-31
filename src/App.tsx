@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import "@aws-amplify/ui-react/styles.css";
 import dayjs from 'dayjs';
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
 
 // components
 import { NavbarComponent } from './components/Navbar';
@@ -16,9 +18,24 @@ import { SelectedMonthContext } from "./hooks/SelectedMonthContext"
 import { EventListContext } from './hooks/EventListContext';
 
 // hooks
-import { useAmplify } from './hooks/useAmplify';
 import { useReactGa4 } from './hooks/useReactGa4';
 import { useCloudWatchRum } from './hooks/useCloudWatchRum';
+
+// NOTE: AmplifyにデプロイするとAppSync関連の設定情報が生成されない様子なので
+//  環境変数から読み込んでAmplify.configureに渡すようにしている。
+const GraphQlConfig: Object = {
+  aws_appsync_graphqlEndpoint: process.env.REACT_APP_APPSYNC_GRAPHQLENDPOINT,
+  aws_appsync_region: process.env.REACT_APP_APPSYNC_REGION,
+  aws_appsync_authenticationType: process.env.REACT_APP_APPSYNC_AUTHENTICATIONTYPE,
+  aws_appsync_apiKey: process.env.REACT_APP_APPSYNC_APIKEY
+}
+
+Amplify.configure(
+  {
+    ...config,
+    ...GraphQlConfig
+  }
+)
 
 // const NoCard = () => {
 //   return (
@@ -47,7 +64,6 @@ function getMonth(year:number, month:number) {
 }
 
 function App({ signOut }: any) {
-  useAmplify()
   useReactGa4()
   useCloudWatchRum()
 
