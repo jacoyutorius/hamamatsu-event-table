@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState } from "react"
 import dayjs from "dayjs"
 import { CalendarDayComponent } from "./CalendarDayComponent"
 import { EventListContext } from "../../hooks/EventListContext"
@@ -67,11 +67,8 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
 
   const closeModal = () => {
     setModalOpen(false)
-    // setSelectedCardContent(null)
   }
 
-  // NOTE: カードがクリックされたときに、選択されたカードのindexより表示対象のデータを抽出して
-  //  モーダル内のContentFormComponentに値をセットしてからモーダルを開く。
   const openModal = () => {
     setModalOpen(true)
   }
@@ -117,7 +114,6 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
       title={ event?.EventName || '' }
     >
       { event && <EventContentsComponent event={ event } /> }
-      {/* <ContentFormComponent {...selectedCardContent} /> */}
     </ModalComponent>
   </SelectedEventContext.Provider>)
 }
