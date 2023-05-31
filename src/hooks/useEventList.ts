@@ -12,7 +12,7 @@ export const useEventList = () => {
   const { month, setMonth } = useContext(SelectedMonthContext)
   const { setEventList } = useContext(EventListContext)
 
-  // NOTE: とりあえず最大200レコード取得するようにしている。
+  // NOTE: とりあえず最大400レコード取得するようにしている。
   // TODO: ほんとうはページネーションとかしたほうがいいのだが。
   const limit = 400
 
