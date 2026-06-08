@@ -26,60 +26,62 @@ type ModalLinkProps = {
 // eslint-disable
 const ModalLink = ({ text, url, category, onClick }: ModalLinkProps): JSX.Element => {
   return (
-    <p onClick={onClick}
-      className={`${getLabelColor(category)} my-1 cursor-pointer font-medium mr-2 px-2.5 py-0.5 rounded`}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${getLabelColor(category)} my-1 w-full rounded-2xl border px-3 py-2 text-left text-sm font-medium leading-5 transition duration-150 hover:-translate-y-px hover:shadow-sm`}>
       {text}
-    </p>
+    </button>
   )
 }
 
 function getLabelColor(category: string) {
   if (category === "イベント") {
-    return "bg-blue-50 text-blue-600"
+    return "border-blue-200 bg-blue-50 text-blue-700"
   }
   else if (category === "おしらせ") {
-    return "bg-orange-50 text-orange-600"
+    return "border-orange-200 bg-orange-50 text-orange-700"
   }
   else if (category === "こそだて") {
-    return "bg-green-50 text-green-600"
+    return "border-green-200 bg-green-50 text-green-700"
   }
   else if (category === "けんこう") { 
-    return "bg-amber-50 text-amber-600"
+    return "border-amber-200 bg-amber-50 text-amber-700"
   }
   else if (category === "そうだん") {
-    return "bg-rose-50 text-rose-600"
+    return "border-rose-200 bg-rose-50 text-rose-700"
   }
   else if (category === "おんがく") {
-    return "bg-cyan-50 text-cyan-600"
+    return "border-cyan-200 bg-cyan-50 text-cyan-700"
   }
   else if (category === "講座・教室") {
-    return "bg-lime-50 text-lime-600"
+    return "border-lime-200 bg-lime-50 text-lime-700"
   }
   else if (category === "スポーツ") {
-    return "bg-sky-50 text-sky-600"
+    return "border-sky-200 bg-sky-50 text-sky-700"
   }
   else {
-    console.log({category})
-    return "bg-gray-50 text-gray-800"
+    return "border-slate-200 bg-slate-50 text-slate-700"
   }
 }
 
-function getDateColor(day:any) {
+function getDateColor(day:any, isTargetMonth: boolean) {
   const date = day.format("d")
   
   if (date === '0') {
-    return "bg-red-100"
+    return isTargetMonth ? "bg-red-50 text-red-700" : "bg-red-50/70 text-red-400"
   }
   else if (date === '6') {
-    return "bg-blue-100"
+    return isTargetMonth ? "bg-blue-50 text-blue-700" : "bg-blue-50/70 text-blue-400"
   }
   else {
-    return "bg-gray-100"
+    return isTargetMonth ? "bg-slate-100 text-slate-700" : "bg-slate-100 text-slate-400"
   }
 }
 
 export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, onClick }: CalendarDayComponentProps): JSX.Element => {
   const { setEventKey } = useContext(SelectedEventContext)
+  const isToday = day.format("YYYY-MM-DD") === new Date().toISOString().slice(0, 10)
   
   const linkComponents = events.map((event: CalendarDayEventProps) => {
     const onModalLinkClick = () => {
@@ -96,14 +98,21 @@ export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, 
     </div>)
   })
 
-  const headBgColor = getDateColor(day)
+  const headBgColor = getDateColor(day, isTargetMonth)
 
-  return (<div className={ `border border-gray-200 flex flex-col ${ isTargetMonth ? '' : 'bg-slate-300' }` }>
-    <header className={`flex flex-col items-center ${headBgColor}`}>
-      {isFirstWeek && <p className="text-sm mt-1">{day.format("ddd")}</p>}
-        <p className={"text-base p-1 my-1 text-center"}>{day.format("M/D")}</p>
+  return (<div className={ `flex min-h-[180px] flex-col overflow-hidden rounded-[22px] border shadow-[0_8px_24px_rgba(15,23,42,0.06)] transition duration-200 md:min-h-0 ${ isTargetMonth ? 'border-slate-200 bg-white' : 'border-slate-200 bg-slate-100/90' } ${isToday ? 'ring-2 ring-sky-300 ring-offset-2 ring-offset-white' : ''}` }>
+    <header className={`flex flex-col border-b border-slate-200/80 px-3 pb-2 pt-3 ${headBgColor}`}>
+      {isFirstWeek && <p className="text-[11px] font-semibold uppercase tracking-[0.18em]">{day.format("ddd")}</p>}
+      <div className="mt-1 flex items-center justify-between">
+        <p className={`text-base font-semibold ${isTargetMonth ? 'text-slate-900' : 'text-slate-500'}`}>{day.format("M/D")}</p>
+        {isToday && (
+          <span className="rounded-full bg-sky-600 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+            Today
+          </span>
+        )}
+      </div>
     </header>
-    <div className="px-2 h-64 overflow-x-auto">
+    <div className="flex-1 space-y-1 overflow-y-auto px-2 py-2 md:min-h-[210px] md:px-2.5">
       { linkComponents }
     </div>
   </div>)

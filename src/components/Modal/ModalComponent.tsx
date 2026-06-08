@@ -10,14 +10,15 @@ export type ModalComponentProps = {
 export const ModalComponent = (props: ModalComponentProps): JSX.Element => {  
   return (
     <Modal
+      className="backdrop-blur-sm"
       show={ props.modalOpen }
       onClose={ props.onClose }
       size="4xl"
     >
-      <Modal.Header>
+      <Modal.Header className="border-b border-slate-200 bg-slate-50/80">
         { props.title }
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-white">
         { props.children }
       </Modal.Body>
     </Modal>

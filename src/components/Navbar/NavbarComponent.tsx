@@ -36,31 +36,43 @@ const dropdownItems = (setMonth: any): any => {
 
 export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
   const { month, setMonth } = useEventList()
+  const currentMonthLabel = dayjs(`${month}01`).format("YYYY / MM")
 
   return (
     <Navbar
-      className="sticky top-0"
+      className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/85 px-3 py-3 backdrop-blur-md md:px-5"
       fluid={true}
       rounded={true}
     >
-      <Navbar.Brand href="/">
-        <img
-          src="logo.png"
-          className="mr-3 h-6 sm:h-9"
-          alt="Logo"
-        />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          浜松市イベントカレンダー
-        </span>
+      <Navbar.Brand href="/" className="items-start gap-3">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0f4c81,#1f7abf)] text-sm font-bold text-white shadow-[0_10px_25px_rgba(15,76,129,0.28)]">
+          浜
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
+            Public Event Calendar
+          </p>
+          <span className="block self-center whitespace-nowrap text-lg font-bold tracking-[0.02em] text-slate-900 md:text-xl">
+            浜松市イベントカレンダー
+          </span>
+        </div>
       </Navbar.Brand>
-      <div className="flex gap-x-1 md:order-2">
+      <div className="flex items-center gap-x-2 md:order-2">
+        <div className="hidden rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-right md:block">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Selected Month
+          </p>
+          <p className="text-sm font-semibold text-slate-800">
+            {currentMonthLabel}
+          </p>
+        </div>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
         <Dropdown
-          label={month}
+          label={currentMonthLabel}
           inline={true}
-          theme={{ inlineWrapper: "flex items-center text-base text-gray-800" }}
+          theme={{ inlineWrapper: "inline-flex items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700" }}
           dismissOnClick={true}>
           { dropdownItems(setMonth) }
         </Dropdown>

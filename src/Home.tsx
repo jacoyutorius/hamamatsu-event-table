@@ -55,6 +55,7 @@ function Home({ signOut }:any) {
   const [eventList, setEventList] = useState<any>([])
 
   const calendar = getMonth(Number(month.substring(0, 4)), Number(month.substring(4, 6)) - 1)
+  const selectedMonthLabel = dayjs(`${month}01`).format("YYYY年M月")
 
   return (
     <EventListContext.Provider value={ {eventList, setEventList} }>
@@ -70,9 +71,49 @@ function Home({ signOut }:any) {
           {/* ナビバー */}
           <NavbarComponent onClick={toggleCreateModal} signOut={signOut} />
 
-          <div className="h-screen flex flex-col mb-20 md:mx-2">
-            <CalendarComponent calendar={calendar}></CalendarComponent>
-          </div>
+          <main className="mx-auto flex min-h-screen w-full max-w-[1520px] flex-col px-3 pb-8 pt-4 md:px-5">
+            <section className="mb-4 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/90 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+              <div className="flex flex-col gap-3 border-b border-slate-200 bg-[linear-gradient(135deg,rgba(238,246,255,0.95),rgba(255,255,255,0.88))] px-5 py-5 md:flex-row md:items-end md:justify-between md:px-7">
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-sky-700">
+                    Hamamatsu City Event Guide
+                  </p>
+                  <h1 className="text-2xl font-bold tracking-[0.02em] text-slate-900 md:text-3xl">
+                    {selectedMonthLabel}のイベントカレンダー
+                  </h1>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    浜松市内のイベントを、日付ごとに見やすく整理したカレンダー。
+                    気になるイベントを選ぶと詳細情報を確認できる。
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3 md:min-w-[260px]">
+                  <div className="rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm">
+                    <p className="text-xs font-medium tracking-[0.18em] text-slate-500">
+                      EVENT COUNT
+                    </p>
+                    <p className="mt-2 text-2xl font-bold text-slate-900">
+                      {eventList.length}
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm">
+                    <p className="text-xs font-medium tracking-[0.18em] text-slate-500">
+                      STATUS
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-emerald-700">
+                      公開中
+                    </p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      月ごとのイベントを一覧表示
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col px-3 py-3 md:px-4 md:py-4">
+                <CalendarComponent calendar={calendar}></CalendarComponent>
+              </div>
+            </section>
+          </main>
 
           {/* { eventList.length === 0 &&
             <div className="flex justify-center my-32">

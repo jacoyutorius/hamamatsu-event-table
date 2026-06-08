@@ -2,7 +2,7 @@ import { Footer } from "flowbite-react"
 
 export const FooterComponent = (): JSX.Element => {
   return (
-    <Footer container={true} className="fixed bottom-0 left-0 z-20">
+    <Footer container={true} className="mx-auto mt-4 w-full max-w-[1520px] border-t border-slate-200/80 bg-transparent px-4 pb-6 pt-2 text-slate-500 md:px-5">
       <Footer.Copyright
         href="https://twitter.com/jacoyutorius"
         by="@jacoyutorius"

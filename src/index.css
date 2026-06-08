@@ -4,21 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at top left, rgba(191, 219, 254, 0.45), transparent 28%),
+      linear-gradient(180deg, #eef4fb 0%, #f7fafc 24%, #eef3f8 100%);
+    color: #0f172a;
+    font-family:
+      "Hiragino Sans",
+      "Yu Gothic",
+      "YuGothic",
+      "Noto Sans JP",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+  }
+}
+
 .App {
-  /* background-color: #83cfdc; */
   min-height: 100vh;
 }
-
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
