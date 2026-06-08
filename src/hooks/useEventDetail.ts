@@ -1,24 +1,18 @@
 import { useEffect, useState } from 'react'
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../graphql/queries';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { GetOneQuery, HamamatsuEvents } from '../API';
+import { HamamatsuEvents } from '../API';
+import { findEventByKey } from '../data/mockEvents';
 
 export const useEventDetail = () => {
   const [eventKey, setEventKey] = useState("")
   const [event, setEvent] = useState<HamamatsuEvents | undefined | null>(null)
 
   useEffect(() => {
-    const fetch = async () => {
-      if (eventKey === null) return
-
-      const record = await API.graphql<GraphQLQuery<GetOneQuery>>(
-        graphqlOperation(queries.getOne, { Key: eventKey })
-      );
-      setEvent(record.data?.getOne)
+    if (!eventKey) {
+      setEvent(null)
+      return
     }
 
-    fetch()
+    setEvent(findEventByKey(eventKey))
   }, [eventKey])
 
   return {
