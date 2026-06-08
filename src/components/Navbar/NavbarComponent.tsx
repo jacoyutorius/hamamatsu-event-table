@@ -7,28 +7,30 @@ export type NavbarComponentProps = {
   signOut: any
 }
 
-const months = [
-  dayjs(new Date(2023, 1, 1)),
-  dayjs(new Date(2023, 2, 1)),
-  dayjs(new Date(2023, 3, 1)),
-  dayjs(new Date(2023, 4, 1)),
-  dayjs(new Date(2023, 5, 1)),
-  dayjs(new Date(2023, 6, 1)),
-  dayjs(new Date(2023, 7, 1)),
-  dayjs(new Date(2023, 8, 1)),
-  dayjs(new Date(2023, 9, 1)),
-  dayjs(new Date(2023, 10, 1)),
-  dayjs(new Date(2023, 11, 1)),
-  dayjs(new Date(2023, 12, 1)),
-]
+const getSelectableMonths = (month: string) => {
+  const baseMonth = dayjs(`${month}01`).startOf("month")
 
-const dropdownItems = (setMonth: any): any => {
-  return months.map(month => {
+  return Array.from({ length: 15 }, (_, index) => {
+    return baseMonth.add(index - 6, "month")
+  })
+}
+
+const dropdownItems = (month: string, setMonth: any): any => {
+  const selectableMonths = getSelectableMonths(month)
+
+  return selectableMonths.map((itemMonth) => {
     return (
       <Dropdown.Item
-        key={month.format('YYYYMM')}
-        onClick={() => setMonth(month.format('YYYYMM')) }>
-        { month.format('YYYY/MM') }
+        key={itemMonth.format('YYYYMM')}
+        onClick={() => setMonth(itemMonth.format('YYYYMM')) }>
+        <div className="flex min-w-[130px] items-center justify-between gap-4">
+          <span>{ itemMonth.format('YYYY年M月') }</span>
+          {itemMonth.format("YYYYMM") === month && (
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700">
+              現在
+            </span>
+          )}
+        </div>
       </Dropdown.Item>  
     )
   })
@@ -36,7 +38,11 @@ const dropdownItems = (setMonth: any): any => {
 
 export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
   const { month, setMonth } = useEventList()
-  const currentMonthLabel = dayjs(`${month}01`).format("YYYY / MM")
+  const currentMonth = dayjs(`${month}01`)
+  const currentMonthLabel = currentMonth.format("YYYY年M月")
+  const moveMonth = (value: number) => {
+    setMonth(currentMonth.add(value, "month").format("YYYYMM"))
+  }
 
   return (
     <Navbar
@@ -57,26 +63,39 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
           </span>
         </div>
       </Navbar.Brand>
-      <div className="flex items-center gap-x-2 md:order-2">
-        <div className="hidden rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-right md:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Selected Month
+      <div className="flex items-center gap-2 md:order-2">
+        <div className="rounded-[22px] border border-slate-200 bg-white/90 px-2 py-2 shadow-sm">
+          <p className="px-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            Display Month
           </p>
-          <p className="text-sm font-semibold text-slate-800">
-            {currentMonthLabel}
-          </p>
+          <div className="mt-1 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => moveMonth(-1)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-600 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
+              aria-label="前の月を表示"
+            >
+              ‹
+            </button>
+            <Dropdown
+              label={currentMonthLabel}
+              inline={true}
+              theme={{ inlineWrapper: "inline-flex min-w-[136px] items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700" }}
+              dismissOnClick={true}
+            >
+              { dropdownItems(month, setMonth) }
+            </Dropdown>
+            <button
+              type="button"
+              onClick={() => moveMonth(1)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-600 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
+              aria-label="次の月を表示"
+            >
+              ›
+            </button>
+          </div>
         </div>
-        <Navbar.Toggle />
       </div>
-      <Navbar.Collapse>
-        <Dropdown
-          label={currentMonthLabel}
-          inline={true}
-          theme={{ inlineWrapper: "inline-flex items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700" }}
-          dismissOnClick={true}>
-          { dropdownItems(setMonth) }
-        </Dropdown>
-      </Navbar.Collapse>
     </Navbar>
   )
 }
