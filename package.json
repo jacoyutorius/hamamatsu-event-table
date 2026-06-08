@@ -2,6 +2,9 @@
   "name": "hamamatsu-event-table",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22 <23"
+  },
   "dependencies": {
     "@aws-amplify/ui-react": "^4.6.5",
     "@testing-library/jest-dom": "^6.9.1",
