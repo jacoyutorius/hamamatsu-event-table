@@ -87,7 +87,7 @@ export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, 
       onClick()
     }
   
-    return (<div>
+    return (<div key={event.key}>
       <ModalLink
         onClick={onModalLinkClick}
         text={event.eventName}

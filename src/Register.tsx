@@ -1,5 +1,4 @@
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import "@aws-amplify/ui-react/styles.css";
 import { Link } from "react-router-dom";
 
 const Register = ({ signOut, user }: any) => {

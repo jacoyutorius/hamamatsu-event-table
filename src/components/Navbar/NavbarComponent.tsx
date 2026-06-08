@@ -25,7 +25,9 @@ const months = [
 const dropdownItems = (setMonth: any): any => {
   return months.map(month => {
     return (
-      <Dropdown.Item onClick={() => setMonth(month.format('YYYYMM')) }>
+      <Dropdown.Item
+        key={month.format('YYYYMM')}
+        onClick={() => setMonth(month.format('YYYYMM')) }>
         { month.format('YYYY/MM') }
       </Dropdown.Item>  
     )
