@@ -15,9 +15,9 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "aws-rum-web": "^1.25.0",
-    "dayjs": "^1.11.7",
-    "flowbite": "^1.6.4",
-    "flowbite-react": "^0.4.2",
+    "dayjs": "^1.11.21",
+    "flowbite": "^1.8.1",
+    "flowbite-react": "^0.4.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
@@ -51,6 +51,6 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.1"
+    "tailwindcss": "^3.4.19"
   }
 }
