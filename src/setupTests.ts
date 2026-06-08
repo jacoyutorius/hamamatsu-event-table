@@ -7,3 +7,7 @@ import '@testing-library/jest-dom';
 if (!window.URL.createObjectURL) {
   window.URL.createObjectURL = jest.fn();
 }
+
+jest.mock('aws-rum-web', () => ({
+  AwsRum: jest.fn(),
+}));
