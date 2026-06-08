@@ -50,21 +50,21 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       fluid={true}
       rounded={true}
     >
-      <Navbar.Brand href="/" className="items-start gap-3">
+      <Navbar.Brand href="/" className="items-start gap-3 pr-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0f4c81,#1f7abf)] text-sm font-bold text-white shadow-[0_10px_25px_rgba(15,76,129,0.28)]">
           浜
         </div>
-        <div>
+        <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
             Public Event Calendar
           </p>
-          <span className="block self-center whitespace-nowrap text-lg font-bold tracking-[0.02em] text-slate-900 md:text-xl">
+          <span className="block self-center text-base font-bold tracking-[0.02em] text-slate-900 sm:text-lg md:text-xl">
             浜松市イベントカレンダー
           </span>
         </div>
       </Navbar.Brand>
-      <div className="flex items-center gap-2 md:order-2">
-        <div className="rounded-[22px] border border-slate-200 bg-white/90 px-2 py-2 shadow-sm">
+      <div className="mt-3 flex w-full items-center gap-2 md:mt-0 md:w-auto md:justify-end md:order-2">
+        <div className="w-full rounded-[22px] border border-slate-200 bg-white/90 px-2 py-2 shadow-sm md:w-auto">
           <p className="px-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
             Display Month
           </p>
@@ -72,23 +72,25 @@ export const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
             <button
               type="button"
               onClick={() => moveMonth(-1)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-600 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-600 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
               aria-label="前の月を表示"
             >
               ‹
             </button>
-            <Dropdown
-              label={currentMonthLabel}
-              inline={true}
-              theme={{ inlineWrapper: "inline-flex min-w-[136px] items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700" }}
-              dismissOnClick={true}
-            >
-              { dropdownItems(month, setMonth) }
-            </Dropdown>
+            <div className="min-w-0 flex-1 md:flex-none">
+              <Dropdown
+                label={currentMonthLabel}
+                inline={true}
+                theme={{ inlineWrapper: "inline-flex w-full min-w-0 items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700 md:min-w-[136px]" }}
+                dismissOnClick={true}
+              >
+                { dropdownItems(month, setMonth) }
+              </Dropdown>
+            </div>
             <button
               type="button"
               onClick={() => moveMonth(1)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-600 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-600 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
               aria-label="次の月を表示"
             >
               ›

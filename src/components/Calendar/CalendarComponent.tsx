@@ -103,7 +103,7 @@ export const CalendarComponent = ({ calendar }: CalendarComponentProps): JSX.Ele
   return (<SelectedEventContext.Provider value={ { eventKey, setEventKey } }>
     <div className="flex flex-1">
       <div className="flex-1 grid grid-cols-1 gap-3 md:grid-cols-7 md:grid-rows-6 md:gap-2">
-        { calendarArray } 
+          { calendarArray }
       </div>
     </div>
 

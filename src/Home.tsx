@@ -72,13 +72,13 @@ function Home({ signOut }:any) {
           <NavbarComponent onClick={toggleCreateModal} signOut={signOut} />
 
           <main className="mx-auto flex min-h-screen w-full max-w-[1520px] flex-col px-3 pb-8 pt-4 md:px-5">
-            <section className="mb-4 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/90 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-              <div className="flex flex-col gap-3 border-b border-slate-200 bg-[linear-gradient(135deg,rgba(238,246,255,0.95),rgba(255,255,255,0.88))] px-5 py-5 md:flex-row md:items-end md:justify-between md:px-7">
+            <section className="mb-4 overflow-hidden rounded-[24px] border border-slate-200/80 bg-white/90 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:rounded-[28px]">
+              <div className="flex flex-col gap-4 border-b border-slate-200 bg-[linear-gradient(135deg,rgba(238,246,255,0.95),rgba(255,255,255,0.88))] px-4 py-5 sm:px-5 md:flex-row md:items-end md:justify-between md:px-7">
                 <div>
                   <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-sky-700">
                     Hamamatsu City Event Guide
                   </p>
-                  <h1 className="text-2xl font-bold tracking-[0.02em] text-slate-900 md:text-3xl">
+                  <h1 className="text-xl font-bold tracking-[0.02em] text-slate-900 sm:text-2xl md:text-3xl">
                     {selectedMonthLabel}のイベントカレンダー
                   </h1>
                   <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -86,7 +86,7 @@ function Home({ signOut }:any) {
                     気になるイベントを選ぶと詳細情報を確認できる。
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 md:min-w-[260px]">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:min-w-[260px]">
                   <div className="rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm">
                     <p className="text-xs font-medium tracking-[0.18em] text-slate-500">
                       EVENT COUNT
@@ -109,7 +109,7 @@ function Home({ signOut }:any) {
                 </div>
               </div>
 
-              <div className="flex flex-col px-3 py-3 md:px-4 md:py-4">
+              <div className="flex flex-col px-2 py-3 sm:px-3 md:px-4 md:py-4">
                 <CalendarComponent calendar={calendar}></CalendarComponent>
               </div>
             </section>

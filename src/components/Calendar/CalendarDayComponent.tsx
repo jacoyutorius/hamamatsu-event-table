@@ -29,7 +29,7 @@ const ModalLink = ({ text, url, category, onClick }: ModalLinkProps): JSX.Elemen
     <button
       type="button"
       onClick={onClick}
-      className={`${getLabelColor(category)} my-1 w-full rounded-2xl border px-3 py-2 text-left text-sm font-medium leading-5 transition duration-150 hover:-translate-y-px hover:shadow-sm`}>
+      className={`${getLabelColor(category)} my-1 w-full rounded-2xl border px-2.5 py-2 text-left text-xs font-medium leading-5 transition duration-150 hover:-translate-y-px hover:shadow-sm sm:px-3 sm:text-sm`}>
       {text}
     </button>
   )
@@ -100,11 +100,11 @@ export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, 
 
   const headBgColor = getDateColor(day, isTargetMonth)
 
-  return (<div className={ `flex min-h-[180px] flex-col overflow-hidden rounded-[22px] border shadow-[0_8px_24px_rgba(15,23,42,0.06)] transition duration-200 md:min-h-0 ${ isTargetMonth ? 'border-slate-200 bg-white' : 'border-slate-200 bg-slate-100/90' } ${isToday ? 'ring-2 ring-sky-300 ring-offset-2 ring-offset-white' : ''}` }>
-    <header className={`flex flex-col border-b border-slate-200/80 px-3 pb-2 pt-3 ${headBgColor}`}>
+  return (<div className={ `flex min-h-[150px] flex-col overflow-hidden rounded-[20px] border shadow-[0_8px_24px_rgba(15,23,42,0.06)] transition duration-200 sm:min-h-[180px] ${ isTargetMonth ? 'border-slate-200 bg-white' : 'border-slate-200 bg-slate-100/90' } ${isToday ? 'ring-2 ring-sky-300 ring-offset-2 ring-offset-white' : ''}` }>
+    <header className={`flex flex-col border-b border-slate-200/80 px-2.5 pb-2 pt-2.5 sm:px-3 sm:pt-3 ${headBgColor}`}>
       {isFirstWeek && <p className="text-[11px] font-semibold uppercase tracking-[0.18em]">{day.format("ddd")}</p>}
       <div className="mt-1 flex items-center justify-between">
-        <p className={`text-base font-semibold ${isTargetMonth ? 'text-slate-900' : 'text-slate-500'}`}>{day.format("M/D")}</p>
+        <p className={`text-sm font-semibold sm:text-base ${isTargetMonth ? 'text-slate-900' : 'text-slate-500'}`}>{day.format("M/D")}</p>
         {isToday && (
           <span className="rounded-full bg-sky-600 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
             Today
@@ -112,7 +112,7 @@ export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, 
         )}
       </div>
     </header>
-    <div className="flex-1 space-y-1 overflow-y-auto px-2 py-2 md:min-h-[210px] md:px-2.5">
+    <div className="flex-1 space-y-1 overflow-y-auto px-2 py-2 sm:min-h-[170px] sm:px-2.5 md:min-h-[210px]">
       { linkComponents }
     </div>
   </div>)

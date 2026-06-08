@@ -49,11 +49,11 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
   
   return (
     <div className="space-y-5">
-      <section className="rounded-3xl border border-slate-200 bg-slate-50/70 p-5">
+      <section className="rounded-3xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5">
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">
           Event Overview
         </p>
-        <h3 className="text-2xl font-bold text-slate-900">
+        <h3 className="text-xl font-bold text-slate-900 sm:text-2xl">
           {event?.EventName}
         </h3>
         {event?.EventNameKana && (
@@ -65,7 +65,7 @@ export const EventContentsComponent = ({ event }: EventContentsComponentProps): 
 
       <dl className="space-y-3">
         {rows.map((row) => (
-          <div key={row.label} className="grid gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-4 md:grid-cols-[140px_minmax(0,1fr)] md:gap-4">
+          <div key={row.label} className="grid gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-3 sm:px-4 sm:py-4 md:grid-cols-[140px_minmax(0,1fr)] md:gap-4">
             <dt className="text-sm font-semibold tracking-[0.08em] text-slate-500">
               {row.label}
             </dt>
