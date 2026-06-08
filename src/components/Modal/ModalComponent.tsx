@@ -15,7 +15,7 @@ export const ModalComponent = (props: ModalComponentProps): JSX.Element => {
       size="4xl"
     >
       <Modal.Header>
-        <h2 className="text-x2">{ props.title }</h2>
+        { props.title }
       </Modal.Header>
       <Modal.Body>
         { props.children }

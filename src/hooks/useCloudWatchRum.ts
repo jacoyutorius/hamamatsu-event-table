@@ -17,7 +17,7 @@ export const useCloudWatchRum = () => {
     const APPLICATION_VERSION: string = '1.0.0';
     const APPLICATION_REGION: string = 'ap-northeast-1';
 
-    const awsRum: AwsRum = new AwsRum(
+    new AwsRum(
       APPLICATION_ID,
       APPLICATION_VERSION,
       APPLICATION_REGION,
