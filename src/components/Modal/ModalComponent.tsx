@@ -11,6 +11,7 @@ export const ModalComponent = (props: ModalComponentProps): JSX.Element => {
   return (
     <Modal
       className="backdrop-blur-sm"
+      dismissible
       show={ props.modalOpen }
       onClose={ props.onClose }
       size="4xl"
