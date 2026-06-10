@@ -112,7 +112,7 @@ export const CalendarDayComponent = ({ day, isTargetMonth, isFirstWeek, events, 
         )}
       </div>
     </header>
-    <div className="flex-1 space-y-1 overflow-y-auto px-2 py-2 sm:min-h-[170px] sm:px-2.5 md:min-h-[210px]">
+    <div className="flex-1 space-y-1 overflow-y-auto px-2 py-2 sm:min-h-[170px] sm:px-2.5 md:min-h-[180px] lg:min-h-[210px]">
       { linkComponents }
     </div>
   </div>)
