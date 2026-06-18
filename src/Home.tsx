@@ -73,7 +73,7 @@ function Home({ signOut }:any) {
 
           <main className="mx-auto flex min-h-screen w-full max-w-[1520px] flex-col px-3 pb-8 pt-4 md:px-5">
             <section className="mb-4 overflow-hidden rounded-[24px] border border-slate-200/80 bg-white/90 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:rounded-[28px]">
-              <div className="flex flex-col gap-4 border-b border-slate-200 bg-[linear-gradient(135deg,rgba(238,246,255,0.95),rgba(255,255,255,0.88))] px-4 py-5 sm:px-5 lg:flex-row lg:items-end lg:justify-between lg:px-7">
+              <div className="border-b border-slate-200 bg-[linear-gradient(135deg,rgba(238,246,255,0.95),rgba(255,255,255,0.88))] px-4 py-5 sm:px-5 lg:px-7">
                 <div>
                   <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-sky-700">
                     Hamamatsu City Event Guide
@@ -85,27 +85,6 @@ function Home({ signOut }:any) {
                     浜松市内のイベントを、日付ごとに見やすく整理したカレンダー。
                     気になるイベントを選ぶと詳細情報を確認できる。
                   </p>
-                </div>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:min-w-[260px]">
-                  <div className="rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm">
-                    <p className="text-xs font-medium tracking-[0.18em] text-slate-500">
-                      EVENT COUNT
-                    </p>
-                    <p className="mt-2 text-2xl font-bold text-slate-900">
-                      {eventList.length}
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm">
-                    <p className="text-xs font-medium tracking-[0.18em] text-slate-500">
-                      STATUS
-                    </p>
-                    <p className="mt-2 text-sm font-semibold text-emerald-700">
-                      公開中
-                    </p>
-                    <p className="mt-1 text-xs text-slate-500">
-                      月ごとのイベントを一覧表示
-                    </p>
-                  </div>
                 </div>
               </div>
 
