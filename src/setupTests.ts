@@ -3,11 +3,12 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 if (!window.URL.createObjectURL) {
-  window.URL.createObjectURL = jest.fn();
+  window.URL.createObjectURL = vi.fn();
 }
 
-jest.mock('aws-rum-web', () => ({
-  AwsRum: jest.fn(),
+vi.mock('aws-rum-web', () => ({
+  AwsRum: vi.fn(),
 }));
