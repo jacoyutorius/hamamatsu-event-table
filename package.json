@@ -14,6 +14,7 @@
     "@types/node": "^22.16.2",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
+    "aws-amplify": "^5.3.33",
     "aws-rum-web": "^1.25.0",
     "dayjs": "^1.11.21",
     "flowbite": "^1.8.1",
@@ -22,7 +23,6 @@
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
     "react-router-dom": "^6.30.4",
-    "typescript": "^5.9.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -30,7 +30,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "ampx:sandbox": "npx ampx sandbox",
+    "ampx:sandbox:outputs": "npx ampx sandbox --outputs-out-dir ."
   },
   "eslintConfig": {
     "extends": [
@@ -51,10 +53,17 @@
     ]
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.23.0",
+    "@aws-amplify/backend-cli": "^1.8.3",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.5.0",
+    "aws-cdk-lib": "^2.244.0",
+    "constructs": "^10.6.0",
+    "esbuild": "^0.28.1",
     "jsdom": "^26.1.0",
     "tailwindcss": "^3.4.19",
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.3",
     "vite": "^7.0.0",
     "vitest": "^3.2.4"
   }

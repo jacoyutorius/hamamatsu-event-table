@@ -6,8 +6,28 @@
 mv .env_sample .env.local
 // 環境変数を追記
 
+# Amplify Gen2 のバックエンドをローカルsandboxで起動し、
+# amplify_outputs.json をプロジェクトルートに出力
+npm run ampx:sandbox:outputs
+
+# 別ターミナルでフロント起動
+npm run dev
+```
+
+## Amplify Gen2 メモ
+
+```
+# 初回のみ: AWS Builder ID でログイン
+npx ampx sandbox
+
+# 出力ファイルを更新しながらsandboxを使う
+npm run ampx:sandbox:outputs
+
 npm run start
 ```
+
+- フロントは `src/index.tsx` で `amplify_outputs.json` を読み込んで `Amplify.configure()` を実行しています。
+- `amplify_outputs.json` は `.gitignore` 対象です。
 
 ---
 
