@@ -1,59 +1,77 @@
-# 浜松市イベント情報
+# 浜松市イベントカレンダー
 
-## 準備
+浜松市内のイベント情報を月別カレンダーで表示するReactアプリケーションです。
 
+AppSyncの接続情報が設定されている場合はAppSyncからイベントを取得し、未設定または取得失敗時はローカルのmockデータにフォールバックします。
+
+## 必要な環境
+
+- Node.js 22系
+- npm
+
+このリポジトリでは `.node-version` でNode.jsのバージョンを指定しています。nodenvを使う場合は、必要に応じて次のようにインストールしてください。
+
+```bash
+nodenv install
 ```
-mv .env_sample .env.local
-// 環境変数を追記
 
-npm run start
+## セットアップ
+
+```bash
+npm ci
+cp .env_sample .env.local
 ```
 
----
+`.env.local` にAppSyncの接続情報を設定します。
 
-# Getting Started with Create React App
+```bash
+VITE_EVENT_DATA_SOURCE=
+VITE_APPSYNC_GRAPHQLENDPOINT=
+VITE_APPSYNC_REGION=
+VITE_APPSYNC_AUTHENTICATIONTYPE=apiKey
+VITE_APPSYNC_APIKEY=
+VITE_GA4_ID=
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`VITE_GA4_ID` は任意です。未設定の場合、Google Analyticsは初期化されません。
 
-## Available Scripts
+`VITE_EVENT_DATA_SOURCE` は任意です。
 
-In the project directory, you can run:
+- 未設定: AppSync接続情報があればAppSyncを使い、なければmockデータを使います。
+- `appsync`: AppSync接続情報を使ってイベントを取得します。
+- `mock`: AppSync接続情報が設定されていても、修正前と同じローカルmockデータを使います。
 
-### `npm start`
+## 開発サーバー
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+npm run dev
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Viteのデフォルトでは、次のURLで起動します。
 
-### `npm test`
+```text
+http://localhost:5173/
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## テスト
 
-### `npm run build`
+```bash
+npm test -- --run
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ビルド
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run build
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ビルド成果物は `dist/` に出力されます。
 
-### `npm run eject`
+## AppSync連携
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+イベント一覧は `src/lib/appsyncClient.ts` からAppSyncへGraphQLリクエストを送って取得します。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- フロント側の月形式 `YYYYMM` は、AppSyncの `event_month` 用に `YYYY-MM` へ変換します。
+- AppSyncから返る日時文字列は、カレンダー比較用に `YYYY-MM-DD` へ正規化します。
+- テスト実行時は外部通信せず、mockデータを使います。
+- `VITE_EVENT_DATA_SOURCE=mock` を設定すると、AppSyncを使わずmockデータに固定できます。
