@@ -10,7 +10,9 @@ type GraphQLResponse<T> = {
 const endpoint = import.meta.env.VITE_APPSYNC_GRAPHQLENDPOINT;
 const apiKey = import.meta.env.VITE_APPSYNC_APIKEY;
 const authenticationType = import.meta.env.VITE_APPSYNC_AUTHENTICATIONTYPE;
+const eventDataSource = import.meta.env.VITE_EVENT_DATA_SOURCE;
 const isTest = import.meta.env.MODE === "test";
+const dataSource = (eventDataSource ?? "").toLowerCase();
 
 const listHamamatsuEventsByMonth = /* GraphQL */ `
   query ListHamamatsuEventsByMonth($event_month: String!, $limit: Int, $nextToken: String) {
@@ -63,7 +65,7 @@ const listHamamatsuEventsByMonth = /* GraphQL */ `
   }
 `;
 
-export const isAppSyncConfigured = Boolean(endpoint && apiKey && !isTest);
+export const isAppSyncConfigured = Boolean(endpoint && apiKey && !isTest && dataSource !== "mock");
 
 const toAppSyncMonth = (month: string) => {
   if (/^\d{6}$/.test(month)) {

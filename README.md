@@ -25,6 +25,7 @@ cp .env_sample .env.local
 `.env.local` にAppSyncの接続情報を設定します。
 
 ```bash
+VITE_EVENT_DATA_SOURCE=
 VITE_APPSYNC_GRAPHQLENDPOINT=
 VITE_APPSYNC_REGION=
 VITE_APPSYNC_AUTHENTICATIONTYPE=apiKey
@@ -33,6 +34,12 @@ VITE_GA4_ID=
 ```
 
 `VITE_GA4_ID` は任意です。未設定の場合、Google Analyticsは初期化されません。
+
+`VITE_EVENT_DATA_SOURCE` は任意です。
+
+- 未設定: AppSync接続情報があればAppSyncを使い、なければmockデータを使います。
+- `appsync`: AppSync接続情報を使ってイベントを取得します。
+- `mock`: AppSync接続情報が設定されていても、修正前と同じローカルmockデータを使います。
 
 ## 開発サーバー
 
@@ -67,3 +74,4 @@ npm run build
 - フロント側の月形式 `YYYYMM` は、AppSyncの `event_month` 用に `YYYY-MM` へ変換します。
 - AppSyncから返る日時文字列は、カレンダー比較用に `YYYY-MM-DD` へ正規化します。
 - テスト実行時は外部通信せず、mockデータを使います。
+- `VITE_EVENT_DATA_SOURCE=mock` を設定すると、AppSyncを使わずmockデータに固定できます。
